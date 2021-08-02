@@ -129,7 +129,12 @@ reverse_facet_wrap <- function(p) {
   formal_names  <- names(facet_formals)
   params        <- facet$params
 
-  glue::glue("{facet_func}(not_done_yet)")
+    # JM
+  mapped_params <- map( params$facets, get_expr)
+  out <- paste(names(mapped_params), collapse="+")
+  
+  glue::glue("{facet_func}(~{out})")
+  #glue::glue("{facet_func}~(not_done_yet)")
 }
 
 
@@ -148,9 +153,9 @@ reverse_facet <- function(p) {
   if (inherits(facet, "FacetNull")) {
     NULL
   } else if (inherits(facet, "FacetWrap")) {
-    warning("Facetting not done yet")
-    return(NULL)
-    reverse_facet_wrap(p)
+    #warning("Facetting not done yet")
+    #return(NULL)
+    return(reverse_facet_wrap(p))
   } else if (inherits(facet, "FacetGrid")) {
     warning("Facetting not done yet")
     return(NULL)
