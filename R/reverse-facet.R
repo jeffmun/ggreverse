@@ -105,8 +105,15 @@ reverse_facet_grid <- function(p) {
   formal_names  <- names(facet_formals)
   params        <- facet$params
 
-
-  glue::glue("{facet_func}(not_done_yet)")
+  #JM
+  mapped_rows <- map(facet$params$rows, get_expr)
+  mapped_cols <- map(facet$params$cols, get_expr)
+  
+  out_rows <- paste(names(mapped_rows), collapse="+")
+  out_cols <- paste(names(mapped_cols), collapse="+")
+  
+  glue::glue("{facet_func}({out_rows}~{out_cols})")  
+# glue::glue("{facet_func}(not_done_yet)")
 }
 
 
