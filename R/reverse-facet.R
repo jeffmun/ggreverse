@@ -164,8 +164,8 @@ reverse_facet <- function(p) {
     #return(NULL)
     return(reverse_facet_wrap(p))
   } else if (inherits(facet, "FacetGrid")) {
-    warning("Facetting not done yet")
-    return(NULL)
+    #warning("Facetting not done yet")
+    #return(NULL)
     reverse_facet_grid(p)
   }
 }
